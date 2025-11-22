@@ -1,15 +1,87 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Rider ignored files
-/.idea.WebScraper.iml
-/contentModel.xml
-/projectSettingsUpdater.xml
-/modules.xml
-# Ignored default folder with query files
-/queries/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
-# Editor-based HTTP Client requests
-/httpRequests/
+# =====================================================
+# JetBrains Rider / IntelliJ files
+# =====================================================
+.idea/
+*.iml
+shelf/
+workspace.xml
+contentModel.xml
+projectSettingsUpdater.xml
+modules.xml
+httpRequests/
+dataSources/
+dataSources.local.xml
+
+# =====================================================
+# .NET build artifacts
+# =====================================================
+bin/
+obj/
+out/
+artifacts/
+
+# Avalonia XAML generated files
+*.g.cs
+*.g.hpp
+
+# Playwright
+bin/Debug/**/*.playwright
+bin/Release/**/*.playwright
+playwright/.cache/
+pwsh/
+.pwsh/
+ms-playwright/
+
+# =====================================================
+# User-specific files
+# =====================================================
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio / VSCode
+.vscode/
+*.code-workspace
+
+# =====================================================
+# OS-specific files
+# =====================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# =====================================================
+# Logs
+# =====================================================
+*.log
+
+# =====================================================
+# Temporary files
+# =====================================================
+*.tmp
+*.temp
+*.bak
+
+# =====================================================
+# Rider NuGet resolution cache
+# =====================================================
+rider.project.model.nuget.info
+
+# =====================================================
+# Ignore any test output folders
+# =====================================================
+TestResults/
+coverage/
+coverage-report/

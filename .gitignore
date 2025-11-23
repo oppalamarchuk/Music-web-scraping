@@ -1,0 +1,30 @@
+# ===== .NET build artifacts =====
+WebScraper/bin/
+WebScraper/obj/
+
+# ===== Playwright =====
+WebScraper/.playwright/
+WebScraper/ms-playwright/
+WebScraper/pwsh/
+WebScraper/.pwsh/
+WebScraper/playwright/
+
+# ===== Rider / JetBrains =====
+.idea/
+*.iml
+
+# ===== Avalonia =====
+*.g.cs
+*.g.hpp
+
+# ===== Logs =====
+*.log
+
+# ===== System files =====
+.DS_Store
+Thumbs.db
+
+# ===== Temp files =====
+*.tmp
+*.temp
+*.bak

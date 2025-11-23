@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="WebScraper/App.axaml" value="WebScraper/WebScraper.csproj" />
+        <entry key="WebScraper/MainWindow.axaml" value="WebScraper/WebScraper.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

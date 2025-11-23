@@ -10,19 +10,25 @@ namespace WebScraper.Services;
 
 public class ScrapingService
 {
-    public List<Song> GetSongsInfoFromDocument(HtmlDocument document,string selector)
+    private string GetAttr(HtmlDocument doc, string attr)
     {
-        HtmlNodeCollection songRows = document.DocumentNode.SelectNodes(selector);
-        if (songRows == null || !songRows.Any())
+        return doc.DocumentNode
+            .SelectSingleNode($"//*[name()='music-detail-header']/@{attr}")
+            ?.GetAttributeValue(attr, null);
+    }
+
+    public List<Song> GetSongs(HtmlDocument document,string selector)
+    {
+        HtmlNodeCollection songNodes = document.DocumentNode.SelectNodes(selector);
+        if (songNodes == null || !songNodes.Any())
         {
             throw new InvalidOperationException(
                 $"Не вдалося знайти жодного рядка пісні за селектором: '{selector}'. Перевірте контент HTML-документа."
             );
         }
-        
         var songs = new List<Song>();
         
-        foreach (var row in songRows)
+        foreach (var row in songNodes)
         {
             var song = ExtractSongInfo(row);
 
@@ -31,9 +37,23 @@ public class ScrapingService
                 songs.Add(song);
             }
         }
-
         Console.WriteLine($"Фактичних пісень вилучено: {songs.Count}");
+        
         return songs;
+    }
+
+    public Playlist GetPlaylist(HtmlDocument document)
+    {
+        string name = GetAttr(document, "headline");
+        string avatar = GetAttr(document, "image-src");
+        string desc = GetAttr(document, "secondary-text");
+
+        return new Playlist
+        {
+            Name = name.Trim(),
+            AvatarUrl = avatar,
+            Description = desc
+        };
     }
     
     public Song ExtractSongInfo(HtmlNode songRow)

@@ -1,18 +1,47 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:WebScraper.Models" 
-        x:Class="WebScraper.MainWindow"
-        Title="WebScraper"
-        x:DataType="vm:MainWindowViewModel"  Height="600" Width="800">
-    
-    <DataGrid Grid.Row="1" 
-              ItemsSource="{Binding Songs}" 
-              AutoGenerateColumns="False">
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="Назва" Binding="{Binding Title}"/>
-            <DataGridTextColumn Header="Виконавець" Binding="{Binding ArtistName}"/>
-            <DataGridTextColumn Header="Альбом" Binding="{Binding AlbumName}"/>
-            <DataGridTextColumn Header="Тривалість" Binding="{Binding Duration}"/>
-        </DataGrid.Columns>
-    </DataGrid>
+<Window  xmlns="https://github.com/avaloniaui"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:vm="using:WebScraper.Models" 
+         x:Class="WebScraper.MainWindow"
+         x:DataType="vm:MainWindowViewModel"
+         Title="WebScraper"
+         RequestedThemeVariant="Dark"
+         Background="#1E1E1E"
+         Height="600" Width="800">
+
+    <Grid RowDefinitions="Auto,Auto,*" Margin="10">
+
+        <!-- Playlist Name -->
+        <TextBlock Grid.Row="0"
+                   Text="{Binding Playlist.Name}"
+                   FontSize="22"
+                   Foreground="White"
+                   Margin="0,0,0,10"/>
+
+        <!-- Playlist Description -->
+        <TextBlock Grid.Row="1"
+                   Text="{Binding Playlist.Description}"
+                   TextWrapping="Wrap"
+                   Foreground="White"
+                   Margin="0,0,0,10"/>
+
+        <!-- Songs List -->
+        <ListBox Grid.Row="2"
+                 ItemsSource="{Binding Songs}"
+                 Background="#1E1E1E">
+            
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                        <TextBlock Text="{Binding Title}" FontSize="18" Foreground="White"/>
+                        <TextBlock Text="{Binding ArtistName}" Foreground="#CCCCCC"/>
+                        <TextBlock Text="{Binding AlbumName}" Foreground="#AAAAAA"/>
+                        <TextBlock Text="{Binding Duration}" Foreground="#888888"/>
+                        <Separator Margin="0,5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+
 </Window>

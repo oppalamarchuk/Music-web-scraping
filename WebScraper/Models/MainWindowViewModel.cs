@@ -1,49 +1,67 @@
 using System;
 using test_scraping;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using WebScraper.Services;
 
 namespace WebScraper.Models;
 
-public class MainWindowViewModel
+public class MainWindowViewModel : INotifyPropertyChanged
 {
     private readonly IHtmlLoaderService _loader;
     private readonly ScrapingService _scraper;
     
     public ObservableCollection<Song> Songs { get; } = new ObservableCollection<Song>();
-
+    
+    private Playlist _playlist;
+    public Playlist Playlist
+    {
+        get => _playlist;
+        private set
+        {
+            _playlist = value;
+            OnPropertyChanged();
+        }
+    }
     public MainWindowViewModel(IHtmlLoaderService loader, ScrapingService scraper)
     {
+        string alb = "https://music.amazon.com/albums/B073JC7DCF";
+        string pla = "https://music.amazon.com/playlists/B01M11SBC8";
+        
         _loader = loader;
         _scraper = scraper;
         
-        LoadSongsAsync(); 
+        LoadPlaylistAsync(pla ); 
     }
-
-    private async Task LoadSongsAsync(string url = "https://music.amazon.com/playlists/B01M11SBC8")
+    
+    private async Task LoadPlaylistAsync(string url)
     {
-        try
-        {
-            var page = await _loader.LoadHtml(url, "Accept cookies").ConfigureAwait(false);
-
-            string selector = "//music-image-row";
-            var newSongs = _scraper.GetSongsInfoFromDocument(page, selector); 
+        var page = await _loader.LoadHtml(url, "Accept cookies").ConfigureAwait(false);
             
-            await Dispatcher.UIThread.InvokeAsync(() => 
-            {
-                foreach (var song in newSongs)
-                {
-                    Songs.Add(song);
-                }
-                Console.WriteLine($"Завантажено пісень: {Songs.Count}");
-            });
+        var playlist = _scraper.GetPlaylist(page);
+        string selector = "//music-image-row";
+        var newSongs = _scraper.GetSongs(page, selector); 
 
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Помилка під час завантаження: {ex.Message}");
-        }
+     
+        await Dispatcher.UIThread.InvokeAsync(() => 
+        { 
+            Playlist = playlist; 
+
+            Songs.Clear();
+            foreach (var song in newSongs)
+            {
+                Songs.Add(song);
+            }
+            Console.WriteLine($"Завантажено пісень: {Songs.Count}");
+        });
     }
+    
+    public event PropertyChangedEventHandler? PropertyChanged;
+    
+    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
 }

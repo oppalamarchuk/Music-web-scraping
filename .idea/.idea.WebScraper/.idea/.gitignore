@@ -15,8 +15,11 @@ dataSources.local.xml
 # =====================================================
 # .NET build artifacts
 # =====================================================
-bin/
-obj/
+[Bb]in/
+[Oo]bj/
+.idea/
+*.user
+.playwright/
 out/
 artifacts/
 
@@ -85,3 +88,6 @@ rider.project.model.nuget.info
 TestResults/
 coverage/
 coverage-report/
+
+cookies.json
+name.html

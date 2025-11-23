@@ -1,93 +1,32 @@
-# =====================================================
-# JetBrains Rider / IntelliJ files
-# =====================================================
+# ===== .NET build artifacts =====
+bin/
+obj/
+
+# ===== Rider / JetBrains =====
 .idea/
 *.iml
-shelf/
-workspace.xml
-contentModel.xml
-projectSettingsUpdater.xml
-modules.xml
-httpRequests/
-dataSources/
-dataSources.local.xml
 
-# =====================================================
-# .NET build artifacts
-# =====================================================
-[Bb]in/
-[Oo]bj/
-.idea/
-*.user
+# ===== Playwright =====
 .playwright/
-out/
-artifacts/
+ms-playwright/
+pwsh/
+.pwsh/
+playwright/
+**/.playwright/
+**/ms-playwright/
 
-# Avalonia XAML generated files
+# ===== Avalonia =====
 *.g.cs
 *.g.hpp
 
-# Playwright
-bin/Debug/**/*.playwright
-bin/Release/**/*.playwright
-playwright/.cache/
-pwsh/
-.pwsh/
-ms-playwright/
-
-# =====================================================
-# User-specific files
-# =====================================================
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Visual Studio / VSCode
-.vscode/
-*.code-workspace
-
-# =====================================================
-# OS-specific files
-# =====================================================
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-.Spotlight-V100
-.Trashes
-
-# Linux
-*~
-
-# Windows
-Thumbs.db
-Desktop.ini
-
-# =====================================================
-# Logs
-# =====================================================
+# ===== Logs =====
 *.log
 
-# =====================================================
-# Temporary files
-# =====================================================
+# ===== System files =====
+.DS_Store
+Thumbs.db
+
+# ===== Cache =====
 *.tmp
 *.temp
 *.bak
-
-# =====================================================
-# Rider NuGet resolution cache
-# =====================================================
-rider.project.model.nuget.info
-
-# =====================================================
-# Ignore any test output folders
-# =====================================================
-TestResults/
-coverage/
-coverage-report/
-
-cookies.json
-name.html
